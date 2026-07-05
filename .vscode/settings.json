@@ -3,5 +3,6 @@
     "CMAKE_TOOLCHAIN_FILE": "C:/Users/leigh/dev/vcpkg/scripts/buildsystems/vcpkg.cmake",
     "VCPKG_TARGET_TRIPLET": "x64-windows"
   },
-  "cmake.generator": "Visual Studio 17 2022"
+  "cmake.generator": "Visual Studio 17 2022",
+  "cmake.sourceDirectory": "D:/Personal Projects/Vexel-Display/emulator"
 }

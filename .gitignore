@@ -24,3 +24,4 @@ CMakeCache.txt
 *.ipch
 *.sdf
 *.opensdf
+/.vscode
