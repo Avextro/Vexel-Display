@@ -30,6 +30,20 @@ int SDL_main(int argc, char *argv[])
 
     std::cout << "SDL Initialized Successfully!" << std::endl;
 
+    bool running = true;
+
+    while (running)
+    {
+        SDL_Event event;
+        while (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_QUIT)
+            {
+                running = false;
+            }
+        }
+    }
+
     SDL_Quit();
 
     return 0;
