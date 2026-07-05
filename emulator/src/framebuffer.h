@@ -33,6 +33,7 @@ public:
      * @param colour The color to set the pixel to.
      */
     void setPixel(int x, int y, Pixel colour);
+
     /** @brief Clears the framebuffer with a specific color.
      * @param colour The color to clear the framebuffer with.
      */
@@ -44,14 +45,24 @@ public:
      * @return The color of the specified pixel.
      */
     Pixel getPixel(int x, int y) const;
+
+    /** @brief Gets the entire pixel buffer of the framebuffer.
+     * @return A vector containing all pixels in the framebuffer.
+     */
     std::vector<Pixel> getBuffer() const { return buffer_; }
 
-    
+    /** @brief Checks if a point is within the bounds of the framebuffer.
+     * @param x The x-coordinate of the point.
+     * @param y The y-coordinate of the point.
+     * @return True if the point is within the bounds, false otherwise.
+     */
+    bool isInBounds(int x, int y) const { return x >= 0 && x < width_ && y >= 0 && y < height_; }
 
     /** @brief Gets the width of the framebuffer.
      * @return The width of the framebuffer in pixels.
      */
     int width() const { return width_; }
+
     /** @brief Gets the height of the framebuffer.
      * @return The height of the framebuffer in pixels.
      */

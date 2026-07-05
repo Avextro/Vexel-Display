@@ -8,7 +8,7 @@ Framebuffer::Framebuffer(int width, int height)
 
 void Framebuffer::setPixel(int x, int y, Pixel colour)
 {
-    if (x < 0 || x >= width_ || y < 0 || y >= height_)
+    if (!isInBounds(x, y))
     {
         return;
     }
@@ -18,7 +18,7 @@ void Framebuffer::setPixel(int x, int y, Pixel colour)
 
 Pixel Framebuffer::getPixel(int x, int y) const
 {
-    if (x < 0 || x >= width_ || y < 0 || y >= height_)
+    if (!isInBounds(x, y))
     {
         return {0, 0, 0}; // Return black pixel for out-of-bounds access
     }
