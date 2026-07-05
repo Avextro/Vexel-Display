@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL.h>
 #include "framebuffer.h"
+#include "test_patterns/square.cpp"
 
 int SDL_main(int argc, char *argv[])
 {
@@ -36,9 +37,11 @@ int SDL_main(int argc, char *argv[])
     bool running = true;
 
     // init a red frame buffer
-    Framebuffer framebuffer(32, 16);
+    /*Framebuffer framebuffer(32, 16);
     Pixel red = {255, 0, 0};
     framebuffer.clear(red);
+    framebuffer.setPixel(0, 0, {0, 255, 0}); // set top left pixel to green*/
+    Square squarePattern;
 
     while (running)
     {
@@ -53,6 +56,9 @@ int SDL_main(int argc, char *argv[])
             }
         }
 
+        // Framebuffer framebuffer = gradientPattern.getGradientFramebuffer();
+        Framebuffer framebuffer = squarePattern.getSquareFramebuffer(3, 3, 3, {0, 0, 255}); // blue square
+
         // render pixels to the window
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
@@ -62,7 +68,7 @@ int SDL_main(int argc, char *argv[])
             {
                 Pixel pixel = framebuffer.getPixel(x, y);
                 SDL_SetRenderDrawColor(renderer, pixel.red, pixel.green, pixel.blue, 255);
-                SDL_Rect rect = {x * 24 + 2, y * 24 + 2, 20, 20};
+                SDL_Rect rect = {x * 24 + 2, 364 - (y * 24 + 2), 20, 20};
                 SDL_RenderFillRect(renderer, &rect);
             }
         }
