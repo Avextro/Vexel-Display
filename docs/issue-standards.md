@@ -2,9 +2,9 @@
 
 Each issue represents a single feature or subsystem, large enough to produce visible or functional change in the project when completed.
 
-Issue titles use "type: summary" naming convention as in [classifications](classifications.md)
+Issue titles use "type: summary" naming convention as in [classifications](classifications.md).
 
-Each issue gets it's own branch using "AREA summary", with AREA as defined in [classifications](classifications.md) and summary from the issue title.
+Each issue gets it's own branch named "{issue number} {issue title}". Pull Requests for this branch are assigned a label matching AREA defined in [classifications](classifications.md).
 
 Each issue must define:
 
