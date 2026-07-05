@@ -1,5 +1,7 @@
 # Vexel-Display
 
+![Double Gradient Demo](docs/demos/double_gradient.gif)
+
 A cross-platform LED pixel art editor, emulator, and embedded control system, consisting of:
 
 - A React Native based pixel art app
