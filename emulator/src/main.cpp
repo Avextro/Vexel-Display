@@ -42,6 +42,8 @@ int SDL_main(int argc, char *argv[])
 
     while (running)
     {
+        Uint32 frameStart = SDL_GetTicks();
+
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
@@ -52,6 +54,8 @@ int SDL_main(int argc, char *argv[])
         }
 
         // render pixels to the window
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
         for (int x = 0; x < framebuffer.width(); x++)
         {
             for (int y = 0; y < framebuffer.height(); y++)
@@ -60,9 +64,16 @@ int SDL_main(int argc, char *argv[])
                 SDL_SetRenderDrawColor(renderer, pixel.red, pixel.green, pixel.blue, 255);
                 SDL_Rect rect = {x * 24 + 2, y * 24 + 2, 20, 20};
                 SDL_RenderFillRect(renderer, &rect);
-                        }
+            }
         }
         SDL_RenderPresent(renderer);
+
+        // cap the frame rate to 60 fps
+        Uint32 frameTime = SDL_GetTicks() - frameStart;
+        if (frameTime < 16)
+        {
+            SDL_Delay(16 - frameTime);
+        }
     }
 
     SDL_Quit();
