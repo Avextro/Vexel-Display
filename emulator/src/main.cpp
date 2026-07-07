@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "framebuffer.h"
 #include "test_patterns/square.cpp"
+#include "vexel_renderer.h"
 
 int SDL_main(int argc, char *argv[])
 {
@@ -35,13 +36,11 @@ int SDL_main(int argc, char *argv[])
     std::cout << "SDL Initialized Successfully!" << std::endl;
 
     bool running = true;
-
-    // init a red frame buffer
-    /*Framebuffer framebuffer(32, 16);
-    Pixel red = {255, 0, 0};
-    framebuffer.clear(red);
-    framebuffer.setPixel(0, 0, {0, 255, 0}); // set top left pixel to green*/
     Square squarePattern;
+
+    VexelRenderer vexelRenderer(renderer);
+    Pixel clearColor = {0, 0, 0};
+    Framebuffer framebuffer = squarePattern.getSquareFramebuffer(3, 3, 3, {0, 0, 255});
 
     while (running)
     {
@@ -56,23 +55,8 @@ int SDL_main(int argc, char *argv[])
             }
         }
 
-        // Framebuffer framebuffer = gradientPattern.getGradientFramebuffer();
-        Framebuffer framebuffer = squarePattern.getSquareFramebuffer(3, 3, 3, {0, 0, 255}); // blue square
-
-        // render pixels to the window
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
-        for (int x = 0; x < framebuffer.width(); x++)
-        {
-            for (int y = 0; y < framebuffer.height(); y++)
-            {
-                Pixel pixel = framebuffer.getPixel(x, y);
-                SDL_SetRenderDrawColor(renderer, pixel.red, pixel.green, pixel.blue, 255);
-                SDL_Rect rect = {x * 24 + 2, 364 - (y * 24 + 2), 20, 20};
-                SDL_RenderFillRect(renderer, &rect);
-            }
-        }
-        SDL_RenderPresent(renderer);
+        vexelRenderer.clear(clearColor);
+        vexelRenderer.drawStatic(framebuffer);
 
         // cap the frame rate to 60 fps
         Uint32 frameTime = SDL_GetTicks() - frameStart;

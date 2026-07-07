@@ -23,4 +23,5 @@ void VexelRenderer::drawStatic(const Framebuffer &framebuffer)
             SDL_RenderFillRect(renderer_, &rect);
         }
     }
+    SDL_RenderPresent(renderer_);
 }
