@@ -8,18 +8,20 @@ public:
     FrameTimer(float framesPerSecond = 60.0f);
 
     /** @brief Starts the frame timer */
-    void startFrame() { frameStart_ = SDL_GetTicks(); };
+    void startFrame();
 
     /** @brief Delays program until target frame time has elapsed */
     void endFrame();
 
-    /** @brief Returns milliseconds ellapsed during current frame */
-    Uint32 getFrameTime()
-    {
-        return SDL_GetTicks() - frameStart_;
-    }
+    float getDeltaTime() const { return deltaTime_; };
+    int getFrameCount() const { return frameCount_; };
 
 private:
     Uint32 frameStart_;
-    Uint32 frameTimeTargetMs_;
+    Uint32 previousFrame_;
+
+    float deltaTime_ = 0.0f;
+    float frameTimeTargetMs_;
+
+    int frameCount_ = 0;
 };
