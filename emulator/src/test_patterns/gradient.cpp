@@ -4,9 +4,9 @@
 Gradient::Gradient()
 {
 }
-Framebuffer Gradient::getGradientFramebuffer(int offset)
+Framebuffer Gradient::getGradientFramebuffer(int offset, int width, int height)
 {
-    Framebuffer framebuffer(32, 16);
+    Framebuffer framebuffer(width, height);
     for (int x = 0; x < framebuffer.width(); x++)
     {
         for (int y = 0; y < framebuffer.height(); y++)

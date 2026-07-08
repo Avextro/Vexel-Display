@@ -6,12 +6,14 @@
  * @param red The red component of the pixel (0-255).
  * @param green The green component of the pixel (0-255).
  * @param blue The blue component of the pixel (0-255).
+ * @param alpha The alpha component of the pixel (0-255).
  */
 struct Pixel
 {
     uint8_t red;
     uint8_t green;
     uint8_t blue;
+    uint8_t alpha = 255;
 };
 
 /**
@@ -68,6 +70,8 @@ public:
      * @return The height of the framebuffer in pixels.
      */
     int height() const { return height_; }
+
+    const Pixel *data() const { return buffer_.data(); }
 
 private:
     int width_;

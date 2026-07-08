@@ -5,6 +5,7 @@
 #include "test_patterns/gradient.h"
 
 Application::Application()
+    : framebuffer_{displayConfig_.framebufferWidth, displayConfig_.framebufferHeight}, renderer_{sdlRenderer_, displayConfig_}
 {
 }
 
@@ -18,7 +19,7 @@ bool Application::initialise()
         return false;
     }
 
-    window_ = SDL_CreateWindow("Vexel Display Emulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 768, 384, SDL_WINDOW_SHOWN);
+    window_ = SDL_CreateWindow("Vexel Display Emulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, displayConfig_.textureWidth(), displayConfig_.textureHeight(), SDL_WINDOW_SHOWN);
     // each pixel gets 24x24 space. pixel will be 20x20, with a 2 border
 
     if (!window_)
@@ -37,7 +38,7 @@ bool Application::initialise()
         return false;
     }
 
-    renderer_ = VexelRenderer(sdlRenderer_);
+    renderer_ = VexelRenderer(sdlRenderer_, displayConfig_);
     if (!renderer_.isValid())
     {
         std::cerr << "Failed to create Vexel renderer: " << SDL_GetError() << std::endl;
@@ -84,7 +85,7 @@ int Application::run()
 
 void Application::update(Gradient gradient, int offset)
 {
-    framebuffer_ = gradient.getGradientFramebuffer(offset / 10);
+    framebuffer_ = gradient.getGradientFramebuffer(offset / 10, displayConfig_.framebufferWidth, displayConfig_.framebufferHeight);
 }
 
 void Application::render(Pixel clearColour)

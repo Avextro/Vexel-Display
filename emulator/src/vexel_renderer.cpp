@@ -1,16 +1,17 @@
 #include "vexel_renderer.h"
+#include "display_config.h"
 
-VexelRenderer::VexelRenderer(SDL_Renderer *renderer)
-    : renderer_(renderer)
+VexelRenderer::VexelRenderer(SDL_Renderer *renderer, const DisplayConfig &displayConfig)
+    : renderer_(renderer), displayConfig_(displayConfig)
 {
     texture_ = SDL_CreateTexture(
         renderer_,
         SDL_PIXELFORMAT_ABGR8888,
         SDL_TEXTUREACCESS_STREAMING,
-        768,
-        384);
+        displayConfig_.textureWidth(),
+        displayConfig_.textureHeight());
 
-    output_.resize(768 * 384);
+    output_.resize(displayConfig_.textureWidth() * displayConfig_.textureHeight());
 }
 
 void VexelRenderer::clear(const Pixel &colour)
@@ -27,7 +28,7 @@ void VexelRenderer::drawStatic(const Framebuffer &framebuffer)
         {
             Pixel pixel = framebuffer.getPixel(x, y);
             SDL_SetRenderDrawColor(renderer_, pixel.red, pixel.green, pixel.blue, 255);
-            SDL_Rect rect = {x * 24 + 2, 364 - (y * 24 + 2), 20, 20};
+            SDL_Rect rect = {x * displayConfig_.ledPitch() + displayConfig_.ledPadding, displayConfig_.textureHeight() - displayConfig_.ledPitch() - (y * displayConfig_.ledPitch() + displayConfig_.ledPadding), displayConfig_.ledSize, displayConfig_.ledSize};
             SDL_RenderFillRect(renderer_, &rect);
         }
     }
@@ -46,14 +47,14 @@ void VexelRenderer::drawFramebuffer(const Framebuffer &framebuffer)
         for (int y = 0; y < framebuffer.height(); y++)
         {
             Pixel pixel = framebuffer.getPixel(x, y);
-            drawLED(x * 24, (framebuffer.height() - 1 - y) * 24, pixel);
+            drawLED(x * displayConfig_.ledPitch(), (framebuffer.height() - 1 - y) * displayConfig_.ledPitch(), pixel);
         }
     }
     SDL_UpdateTexture(
         texture_,
         nullptr,
         output_.data(),
-        768 * sizeof(Pixel));
+        displayConfig_.textureWidth() * sizeof(Pixel));
 
     SDL_RenderCopy(
         renderer_,
@@ -66,11 +67,11 @@ void VexelRenderer::drawFramebuffer(const Framebuffer &framebuffer)
 
 void VexelRenderer::drawLED(int x, int y, Pixel colour)
 {
-    for (int px = 2; px < 22; px++)
+    for (int px = displayConfig_.ledPadding; px < displayConfig_.ledPitch() - displayConfig_.ledPadding; px++)
     {
-        for (int py = 2; py < 22; py++)
+        for (int py = displayConfig_.ledPadding; py < displayConfig_.ledPitch() - displayConfig_.ledPadding; py++)
         {
-            output_[(y + py) * 768 + (x + px)] = colour;
+            output_[(y + py) * displayConfig_.textureWidth() + (x + px)] = colour;
         }
     }
 }
