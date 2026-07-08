@@ -4,8 +4,8 @@ struct DisplayConfig
     short framebufferWidth = 32;
     short framebufferHeight = 16;
 
-    short ledSize = 20;
-    short ledPadding = 2;
+    short ledSize = 50;
+    short ledPadding = 5;
 
     short ledPitch() const
     {
