@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include "vexel_renderer.h"
 
 class Application
 {
@@ -22,11 +23,13 @@ public:
 
 private:
     SDL_Window *window_ = nullptr;
-    SDL_Renderer *renderer_ = nullptr;
+    SDL_Renderer *sdlRenderer_ = nullptr;
+    Framebuffer framebuffer_{32, 16};
+    VexelRenderer renderer_{nullptr};
     bool initialised_ = false;
     bool running_ = false;
 
     void handleEvents();
-    void update();
-    void render();
+    void update(Gradient gradient, int offset);
+    void render(Pixel clearColour);
 };

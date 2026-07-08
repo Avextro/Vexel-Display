@@ -2,9 +2,9 @@
 #include <iostream>
 #include <SDL.h>
 #include "vexel_renderer.h"
+#include "test_patterns/gradient.cpp"
 
 Application::Application()
-
 {
 }
 
@@ -28,8 +28,8 @@ bool Application::initialise()
         return false;
     }
 
-    renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
-    if (!renderer_)
+    sdlRenderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
+    if (!sdlRenderer_)
     {
         std::cerr << "Failed to create SDL renderer: " << SDL_GetError() << std::endl;
         SDL_DestroyWindow(window_);
@@ -37,7 +37,17 @@ bool Application::initialise()
         return false;
     }
 
-    std::cout << "SDL Initialized Successfully!" << std::endl;
+    renderer_ = VexelRenderer(sdlRenderer_);
+    if (!renderer_.isValid())
+    {
+        std::cerr << "Failed to create Vexel renderer: " << SDL_GetError() << std::endl;
+        SDL_DestroyWindow(window_);
+        SDL_DestroyRenderer(sdlRenderer_);
+        SDL_Quit();
+        return false;
+    }
+
+    std::cout << "SDL & Emulator Initialised Successfully!" << std::endl;
     initialised_ = true;
     return true;
 }
@@ -46,25 +56,59 @@ int Application::run()
 {
     if (!initialised_)
     {
-        std::cerr << "Application not initialized. Call initialise() before run()." << std::endl;
+        std::cerr << "Application not initialised. Call initialise() before run()." << std::endl;
         return -1;
     }
 
+    Gradient gradient;
+    Pixel clearColour = {0, 0, 0};
+
     while (running_)
     {
+        Uint32 frameStart = SDL_GetTicks();
         handleEvents();
-        update();
-        render();
+        update(gradient, frameStart);
+        render(clearColour);
+
+        // cap the frame rate to 60 fps
+        Uint32 frameTime = SDL_GetTicks() - frameStart;
+        if (frameTime < 16)
+        {
+            SDL_Delay(16 - frameTime);
+        }
     }
 
     return 0;
 }
 
+void Application::update(Gradient gradient, int offset)
+{
+    framebuffer_ = gradient.getGradientFramebuffer(offset);
+}
+
+void Application::render(Pixel clearColour)
+{
+    renderer_.clear(clearColour);
+    renderer_.drawStatic(framebuffer_);
+}
+
+void Application::handleEvents()
+{
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+        if (event.type == SDL_QUIT)
+        {
+            running_ = false;
+        }
+    }
+}
+
 Application::~Application()
 {
-    if (renderer_)
+    if (sdlRenderer_)
     {
-        SDL_DestroyRenderer(renderer_);
+        SDL_DestroyRenderer(sdlRenderer_);
     }
     if (window_)
     {
