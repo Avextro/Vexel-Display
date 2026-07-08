@@ -1,11 +1,12 @@
 #pragma once
 #include <SDL.h>
 #include "framebuffer.h"
+#include "display_config.h"
 
 class VexelRenderer
 {
 public:
-    VexelRenderer(SDL_Renderer *renderer);
+    VexelRenderer(SDL_Renderer *renderer, const DisplayConfig &displayConfig);
 
     bool isValid() const
     {
@@ -28,6 +29,7 @@ private:
     SDL_Renderer *renderer_ = nullptr;
     SDL_Texture *texture_ = nullptr;
     std::vector<Pixel> output_;
+    DisplayConfig displayConfig_;
 
     void drawLED(int x, int y, Pixel colour);
 };

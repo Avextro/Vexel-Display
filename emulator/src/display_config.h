@@ -1,10 +1,11 @@
+#pragma once
 struct DisplayConfig
 {
-    short framebufferWidth;
-    short framebufferHeight;
+    short framebufferWidth = 32;
+    short framebufferHeight = 16;
 
-    short ledSize;
-    short ledPadding;
+    short ledSize = 20;
+    short ledPadding = 2;
 
     short ledPitch() const
     {

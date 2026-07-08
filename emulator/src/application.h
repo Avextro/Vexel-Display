@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "vexel_renderer.h"
 #include "test_patterns/gradient.h"
+#include "display_config.h"
 
 class Application
 {
@@ -30,10 +31,12 @@ public:
 private:
     SDL_Window *window_ = nullptr;
     SDL_Renderer *sdlRenderer_ = nullptr;
-    Framebuffer framebuffer_{32, 16};
-    VexelRenderer renderer_{nullptr};
+    Framebuffer framebuffer_;
+    VexelRenderer renderer_;
     bool initialised_ = false;
     bool running_ = false;
+
+    DisplayConfig displayConfig_;
 
     void handleEvents();
     void update(Gradient gradient, int offset);
