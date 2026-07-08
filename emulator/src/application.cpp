@@ -85,7 +85,7 @@ int Application::run()
 
 void Application::update(Gradient gradient, int offset)
 {
-    framebuffer_ = gradient.getGradientFramebuffer(offset / 10);
+    framebuffer_ = gradient.getGradientFramebuffer(offset / 10, displayConfig_.framebufferWidth, displayConfig_.framebufferHeight);
 }
 
 void Application::render(Pixel clearColour)
