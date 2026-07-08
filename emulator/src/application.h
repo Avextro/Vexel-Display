@@ -3,6 +3,7 @@
 #include "vexel_renderer.h"
 #include "test_patterns/gradient.h"
 #include "display_config.h"
+#include "frame_timer.h"
 
 class Application
 {
@@ -33,10 +34,11 @@ private:
     SDL_Renderer *sdlRenderer_ = nullptr;
     Framebuffer framebuffer_;
     VexelRenderer renderer_;
+    FrameTimer frameTimer_;
+    DisplayConfig displayConfig_;
+
     bool initialised_ = false;
     bool running_ = false;
-
-    DisplayConfig displayConfig_;
 
     void handleEvents();
     void update(Gradient gradient, int offset);

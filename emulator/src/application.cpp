@@ -67,17 +67,12 @@ int Application::run()
     while (running_)
     {
 
-        Uint32 frameStart = SDL_GetTicks();
+        frameTimer_.startFrame();
         handleEvents();
-        update(gradient, frameStart);
+        update(gradient, frameTimer_.getFrameTime());
         render(clearColour);
 
-        // cap the frame rate to 60 fps
-        Uint32 frameTime = SDL_GetTicks() - frameStart;
-        if (frameTime < 16)
-        {
-            SDL_Delay(16 - frameTime);
-        }
+        frameTimer_.endFrame();
     }
 
     return 0;
