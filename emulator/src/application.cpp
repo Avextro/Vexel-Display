@@ -90,7 +90,7 @@ void Application::update(Gradient gradient, int offset)
 void Application::render(Pixel clearColour)
 {
     renderer_.clear(clearColour);
-    renderer_.drawStatic(framebuffer_);
+    renderer_.drawFramebuffer(framebuffer_);
 }
 
 void Application::handleEvents()
