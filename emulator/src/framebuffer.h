@@ -26,6 +26,7 @@ class Framebuffer
 {
 public:
     Framebuffer(int width, int height);
+    Framebuffer(int width, int height, Pixel colour);
 
     /** @brief Sets the color of a specific pixel in the framebuffer.
      * @param x The x-coordinate of the pixel.

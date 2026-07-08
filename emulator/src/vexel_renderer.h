@@ -6,6 +6,12 @@ class VexelRenderer
 {
 public:
     VexelRenderer(SDL_Renderer *renderer);
+
+    bool isValid() const
+    {
+        return renderer_ != nullptr;
+    }
+
     /** @brief Clears the renderer with a specific color.
      * @param colour The color to clear the renderer with.
      */
@@ -17,5 +23,5 @@ public:
     void drawStatic(const Framebuffer &framebuffer);
 
 private:
-    SDL_Renderer *renderer_;
+    SDL_Renderer *renderer_ = nullptr;
 };

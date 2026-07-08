@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(SDL2 CONFIG REQUIRED)
 
-add_executable(emulator src/main.cpp src/framebuffer.cpp src/vexel_renderer.cpp src/test_patterns/square.cpp)
+add_executable(emulator src/main.cpp src/framebuffer.cpp src/vexel_renderer.cpp src/test_patterns/gradient.cpp src/application.cpp)
 
 target_include_directories(emulator PRIVATE
     ${CMAKE_SOURCE_DIR}/src

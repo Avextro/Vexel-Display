@@ -6,6 +6,12 @@ Framebuffer::Framebuffer(int width, int height)
 {
 }
 
+Framebuffer::Framebuffer(int width, int height, Pixel colour)
+    : width_(width), height_(height), buffer_(width * height)
+{
+    clear(colour);
+}
+
 void Framebuffer::setPixel(int x, int y, Pixel colour)
 {
     if (!isInBounds(x, y))
