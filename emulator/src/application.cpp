@@ -2,7 +2,7 @@
 #include <iostream>
 #include <SDL.h>
 #include "vexel_renderer.h"
-#include "test_patterns/gradient.cpp"
+#include "test_patterns/gradient.h"
 
 Application::Application()
 {
@@ -59,12 +59,13 @@ int Application::run()
         std::cerr << "Application not initialised. Call initialise() before run()." << std::endl;
         return -1;
     }
-
+    running_ = true;
     Gradient gradient;
     Pixel clearColour = {0, 0, 0};
 
     while (running_)
     {
+
         Uint32 frameStart = SDL_GetTicks();
         handleEvents();
         update(gradient, frameStart);
@@ -83,7 +84,7 @@ int Application::run()
 
 void Application::update(Gradient gradient, int offset)
 {
-    framebuffer_ = gradient.getGradientFramebuffer(offset);
+    framebuffer_ = gradient.getGradientFramebuffer(offset / 10);
 }
 
 void Application::render(Pixel clearColour)

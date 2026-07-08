@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include "vexel_renderer.h"
+#include "test_patterns/gradient.h"
 
 class Application
 {
@@ -18,6 +19,11 @@ public:
     /** @brief Shuts down the application, releasing resources.
      * @return True if shutdown was successful, false otherwise.
      */
+
+    bool isInitialised() const
+    {
+        return initialised_;
+    }
 
     ~Application();
 
