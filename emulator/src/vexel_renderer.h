@@ -22,6 +22,12 @@ public:
      */
     void drawStatic(const Framebuffer &framebuffer);
 
+    void drawFramebuffer(const Framebuffer &framebuffer);
+
 private:
     SDL_Renderer *renderer_ = nullptr;
+    SDL_Texture *texture_ = nullptr;
+    std::vector<Pixel> output_;
+
+    void drawLED(int x, int y, Pixel colour);
 };
