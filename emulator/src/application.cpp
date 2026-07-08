@@ -69,9 +69,8 @@ int Application::run()
 
         frameTimer_.startFrame();
         handleEvents();
-        update(gradient, frameTimer_.getFrameTime());
+        update(gradient, frameTimer_.getFrameCount());
         render(clearColour);
-
         frameTimer_.endFrame();
     }
 
@@ -80,7 +79,7 @@ int Application::run()
 
 void Application::update(Gradient gradient, int offset)
 {
-    framebuffer_ = gradient.getGradientFramebuffer(offset / 10, displayConfig_.framebufferWidth, displayConfig_.framebufferHeight);
+    framebuffer_ = gradient.getGradientFramebuffer(offset, displayConfig_.framebufferWidth, displayConfig_.framebufferHeight);
 }
 
 void Application::render(Pixel clearColour)
