@@ -5,6 +5,8 @@
 #include "animation/animation.h"
 #include "animation/procedural_animation.h"
 #include "animation/procedural_animations/gradient.h"
+#include "animation/frame_animation.h"
+#include "animation/frame_animations/moving_pixel.h"
 
 Application::Application()
     : framebuffer_{displayConfig_.framebufferWidth, displayConfig_.framebufferHeight}, renderer_{sdlRenderer_, displayConfig_}
@@ -64,7 +66,7 @@ int Application::run()
     }
     running_ = true;
 
-    ProceduralAnimation animation = ProceduralAnimation(displayConfig_.framebufferWidth, displayConfig_.framebufferHeight, gradient);
+    FrameAnimation animation = FrameAnimation(displayConfig_.framebufferWidth, displayConfig_.framebufferHeight, 60.0f, createMovingPixelFrames(displayConfig_.framebufferWidth, displayConfig_.framebufferHeight));
     Pixel clearColour = {0, 0, 0};
 
     while (running_)

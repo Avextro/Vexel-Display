@@ -12,7 +12,7 @@ void FrameAnimation::onUpdate(float elapsedTime, float deltaTime)
     if (frameTimeMs_ > frameTimeTargetMs_)
     {
         currentFrame_++;
-        if (currentFrame_ > length_)
+        if (currentFrame_ == length_)
         {
             if (!looping_)
             {
