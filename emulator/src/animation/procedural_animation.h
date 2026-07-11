@@ -6,8 +6,15 @@ class ProceduralAnimation
     : public Animation
 {
 public:
-    ProceduralAnimation(std::function<void(Framebuffer &)> generator);
+    using Generator =
+        std::function<void(Framebuffer &, float)>;
+
+    ProceduralAnimation(
+        int width,
+        int height,
+        Generator generator);
 
 private:
-    void onUpdate(float deltaTime);
+    Generator generator_;
+    void onUpdate(float elapsedTime, float deltaTime) override;
 };
