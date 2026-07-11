@@ -97,6 +97,10 @@ void Application::handleEvents()
         {
             running_ = false;
         }
+        else
+        {
+            inputContoller_.handleInput(event, animationController_);
+        }
     }
 }
 

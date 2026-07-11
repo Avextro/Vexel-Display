@@ -5,6 +5,7 @@
 #include "display_config.h"
 #include "frame_timer.h"
 #include "animation/animation_controller.h"
+#include "input_controller.h"
 
 class Application
 {
@@ -37,6 +38,7 @@ private:
     std::unique_ptr<VexelRenderer> renderer_;
     FrameTimer frameTimer_;
     AnimationController animationController_;
+    InputController inputContoller_;
 
     bool initialised_ = false;
     bool running_ = false;

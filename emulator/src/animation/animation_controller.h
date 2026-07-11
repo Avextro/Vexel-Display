@@ -12,6 +12,7 @@ public:
     const Framebuffer &framebuffer() const;
     void play() { playing_ = true; };
     void pause() { playing_ = false; };
+    void togglePlayState() { playing_ = !playing_; };
     void increaseSpeed();
     void decreaseSpeed();
     void cycleColour();
@@ -20,7 +21,7 @@ public:
 private:
     std::vector<std::unique_ptr<Animation>>
         animations_;
-    std::vector<Pixel> colours = {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}};
+    std::vector<Pixel> colours_ = {{255, 0, 0}, {255, 255, 0}, {0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {255, 0, 255}};
     float speed_ = 1;
     bool playing_ = true;
     int currentAnimationIndex_ = 0;
