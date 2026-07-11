@@ -16,6 +16,8 @@ public:
 
     void update(float deltaTime);
 
+    void setPlaybackSpeed(float speed) { playbackSpeed_ = speed; };
+
     virtual Type type() const = 0;
 
 protected:

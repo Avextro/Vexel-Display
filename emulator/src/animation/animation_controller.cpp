@@ -36,6 +36,18 @@ const Framebuffer &AnimationController::framebuffer() const
     return currentAnimation_->framebuffer();
 }
 
+void AnimationController::increaseSpeed()
+{
+    speed_ *= 2;
+    currentAnimation_->setPlaybackSpeed(speed_);
+}
+
+void AnimationController::decreaseSpeed()
+{
+    speed_ /= 2;
+    currentAnimation_->setPlaybackSpeed(speed_);
+}
+
 void AnimationController::cycleAnimation()
 {
     if (currentAnimationIndex_ < animations_.size())
@@ -47,6 +59,7 @@ void AnimationController::cycleAnimation()
         currentAnimationIndex_ = 0;
     }
     currentAnimation_ = animations_[currentAnimationIndex_].get();
+    currentAnimation_->setPlaybackSpeed(speed_);
 }
 
 void AnimationController::cycleColour()
