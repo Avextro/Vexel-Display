@@ -4,6 +4,7 @@
 #include "animation/animation.h"
 #include "display_config.h"
 #include "frame_timer.h"
+#include "animation/animation_controller.h"
 
 class Application
 {
@@ -33,14 +34,14 @@ private:
     DisplayConfig displayConfig_;
     SDL_Window *window_ = nullptr;
     SDL_Renderer *sdlRenderer_ = nullptr;
-    Framebuffer framebuffer_;
-    VexelRenderer renderer_;
+    std::unique_ptr<VexelRenderer> renderer_;
     FrameTimer frameTimer_;
+    AnimationController animationController_;
 
     bool initialised_ = false;
     bool running_ = false;
 
     void handleEvents();
-    void update(Animation &animation, float deltaTime);
-    void render(Animation &animation, Pixel clearColour);
+    void update(AnimationController &controller, float deltaTime);
+    void render(AnimationController &animation, Pixel clearColour);
 };
