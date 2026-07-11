@@ -9,5 +9,5 @@ Animation::Animation(int width, int height)
 void Animation::update(float deltaTime)
 {
     elapsedTime_ += deltaTime * playbackSpeed_;
-    onUpdate(deltaTime);
+    onUpdate(elapsedTime_, deltaTime * playbackSpeed_);
 };

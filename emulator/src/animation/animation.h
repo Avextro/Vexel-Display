@@ -5,15 +5,20 @@ class Animation
 {
 public:
     Animation(int width, int height);
+
+    Framebuffer framebuffer() const;
+
     void update(float deltaTime);
-    Framebuffer framebuffer();
 
 protected:
-    virtual void onUpdate(float deltaTime) = 0;
+    Framebuffer framebuffer_;
+
+    virtual void onUpdate(float elapsedTime, float deltaTime) = 0;
+
+    float elapsedTime() const { return elapsedTime_; }
 
 private:
     bool looping_ = true;
     float elapsedTime_ = 0.0f;
     float playbackSpeed_ = 1.0f;
-    Framebuffer framebuffer_;
 };
