@@ -6,7 +6,7 @@ class Animation
 public:
     Animation(int width, int height);
 
-    Framebuffer framebuffer() const;
+    Framebuffer framebuffer() const { return framebuffer_; };
 
     void update(float deltaTime);
 
