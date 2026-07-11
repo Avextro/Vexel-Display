@@ -28,7 +28,10 @@ AnimationController::AnimationController(DisplayConfig displayConfig)
 
 void AnimationController::update(float deltaTime)
 {
-    currentAnimation_->update(deltaTime);
+    if (playing_)
+    {
+        currentAnimation_->update(deltaTime, colours_[currentColourIndex_]);
+    }
 }
 
 const Framebuffer &AnimationController::framebuffer() const
@@ -64,7 +67,7 @@ void AnimationController::cycleAnimation()
 
 void AnimationController::cycleColour()
 {
-    if (currentColourIndex_ < colours.size())
+    if (currentColourIndex_ < colours_.size() - 1)
     {
         currentColourIndex_++;
     }
