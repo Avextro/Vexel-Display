@@ -4,7 +4,7 @@ InputController::InputController()
 {
 }
 
-void InputController::handleInput(SDL_Event event, AnimationController animationController)
+void InputController::handleInput(const SDL_Event &event, AnimationController &animationController)
 {
     switch (event.type)
     {

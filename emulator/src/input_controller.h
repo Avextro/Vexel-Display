@@ -7,5 +7,5 @@ class InputController
 public:
     InputController();
 
-    void handleInput(SDL_Event event, AnimationController animationController);
+    void handleInput(const SDL_Event &event, AnimationController &animationController);
 };
