@@ -50,7 +50,7 @@ void AnimationController::decreaseSpeed()
 
 void AnimationController::cycleAnimation()
 {
-    if (currentAnimationIndex_ < animations_.size())
+    if (currentAnimationIndex_ < animations_.size() - 1)
     {
         currentAnimationIndex_++;
     }
