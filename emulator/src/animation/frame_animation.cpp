@@ -9,8 +9,9 @@ FrameAnimation::FrameAnimation(int width, int height, float framesPerSecond, std
 void FrameAnimation::onUpdate(float elapsedTime, float deltaTime)
 {
     frameTimeMs_ += deltaTime;
-    if (frameTimeMs_ > frameTimeTargetMs_)
+    if (frameTimeMs_ >= frameTimeTargetMs_)
     {
+        frameTimeMs_ = 0;
         currentFrame_++;
         if (currentFrame_ == length_)
         {

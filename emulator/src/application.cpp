@@ -66,7 +66,7 @@ int Application::run()
     }
     running_ = true;
 
-    FrameAnimation animation = FrameAnimation(displayConfig_.framebufferWidth, displayConfig_.framebufferHeight, 60.0f, createMovingPixelFrames(displayConfig_.framebufferWidth, displayConfig_.framebufferHeight));
+    FrameAnimation animation = FrameAnimation(displayConfig_.framebufferWidth, displayConfig_.framebufferHeight, 2.0f, createMovingPixelFrames(displayConfig_.framebufferWidth, displayConfig_.framebufferHeight));
     Pixel clearColour = {0, 0, 0};
 
     while (running_)
