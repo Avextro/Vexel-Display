@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include "vexel_renderer.h"
-#include "test_patterns/gradient.h"
+#include "animation/animation.h"
 #include "display_config.h"
 #include "frame_timer.h"
 
@@ -30,17 +30,17 @@ public:
     ~Application();
 
 private:
+    DisplayConfig displayConfig_;
     SDL_Window *window_ = nullptr;
     SDL_Renderer *sdlRenderer_ = nullptr;
     Framebuffer framebuffer_;
     VexelRenderer renderer_;
     FrameTimer frameTimer_;
-    DisplayConfig displayConfig_;
 
     bool initialised_ = false;
     bool running_ = false;
 
     void handleEvents();
-    void update(Gradient gradient, int offset);
-    void render(Pixel clearColour);
+    void update(Animation &animation, float deltaTime);
+    void render(Animation &animation, Pixel clearColour);
 };

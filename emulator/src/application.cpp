@@ -2,7 +2,9 @@
 #include <iostream>
 #include <SDL.h>
 #include "vexel_renderer.h"
-#include "test_patterns/gradient.h"
+#include "animation/animation.h"
+#include "animation/procedural_animation.h"
+#include "animation/procedural_animations/gradient.h"
 
 Application::Application()
     : framebuffer_{displayConfig_.framebufferWidth, displayConfig_.framebufferHeight}, renderer_{sdlRenderer_, displayConfig_}
@@ -61,7 +63,8 @@ int Application::run()
         return -1;
     }
     running_ = true;
-    Gradient gradient;
+
+    ProceduralAnimation animation = ProceduralAnimation(displayConfig_.framebufferWidth, displayConfig_.framebufferHeight, gradient);
     Pixel clearColour = {0, 0, 0};
 
     while (running_)
@@ -69,23 +72,23 @@ int Application::run()
 
         frameTimer_.startFrame();
         handleEvents();
-        update(gradient, frameTimer_.getFrameCount());
-        render(clearColour);
+        update(animation, frameTimer_.getDeltaTime());
+        render(animation, clearColour);
         frameTimer_.endFrame();
     }
 
     return 0;
 }
 
-void Application::update(Gradient gradient, int offset)
+void Application::update(Animation &animation, float deltaTime)
 {
-    framebuffer_ = gradient.getGradientFramebuffer(offset, displayConfig_.framebufferWidth, displayConfig_.framebufferHeight);
+    animation.update(deltaTime);
 }
 
-void Application::render(Pixel clearColour)
+void Application::render(Animation &animation, Pixel clearColour)
 {
     renderer_.clear(clearColour);
-    renderer_.drawFramebuffer(framebuffer_);
+    renderer_.drawFramebuffer(animation.framebuffer());
 }
 
 void Application::handleEvents()
