@@ -14,6 +14,8 @@ public:
         int height,
         Generator generator);
 
+    Type type() const override { return Type::Procedural; };
+
 private:
     Generator generator_;
     void onUpdate(float elapsedTime, float deltaTime) override;
