@@ -12,7 +12,7 @@ void InputController::handleInput(SDL_Event event, AnimationController animation
         switch (event.key.keysym.sym)
         {
         case SDLK_SPACE:
-            // play/pause alt
+            animationController.togglePlayState();
             break;
         case SDLK_UP:
             animationController.increaseSpeed();

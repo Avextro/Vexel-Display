@@ -12,6 +12,7 @@ public:
     const Framebuffer &framebuffer() const;
     void play() { playing_ = true; };
     void pause() { playing_ = false; };
+    void togglePlayState() { playing_ = !playing_; };
     void increaseSpeed();
     void decreaseSpeed();
     void cycleColour();
