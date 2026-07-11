@@ -97,6 +97,7 @@ void Application::handleEvents()
         {
             running_ = false;
         }
+        
     }
 }
 
