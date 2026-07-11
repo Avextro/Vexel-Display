@@ -7,7 +7,7 @@ class ProceduralAnimation
 {
 public:
     using Generator =
-        std::function<void(Framebuffer &, float)>;
+        std::function<void(Framebuffer &, float, Pixel)>;
 
     ProceduralAnimation(
         int width,

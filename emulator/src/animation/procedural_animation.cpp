@@ -8,5 +8,5 @@ ProceduralAnimation::ProceduralAnimation(int width, int height, Generator genera
 
 void ProceduralAnimation::onUpdate(float elapsedTime, float deltaTime)
 {
-    generator_(framebuffer_, elapsedTime);
+    generator_(framebuffer_, elapsedTime, colour_);
 }
