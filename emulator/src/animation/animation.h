@@ -4,11 +4,21 @@
 class Animation
 {
 public:
+    enum class Type
+    {
+        Procedural,
+        Frame
+    };
+
     Animation(int width, int height);
 
-    Framebuffer framebuffer() const { return framebuffer_; };
+    const Framebuffer &framebuffer() const { return framebuffer_; };
 
     void update(float deltaTime);
+
+    void setPlaybackSpeed(float speed) { playbackSpeed_ = speed; };
+
+    virtual Type type() const = 0;
 
 protected:
     Framebuffer framebuffer_;

@@ -2,14 +2,9 @@
 #include <iostream>
 #include <SDL.h>
 #include "vexel_renderer.h"
-#include "animation/animation.h"
-#include "animation/procedural_animation.h"
-#include "animation/procedural_animations/gradient.h"
-#include "animation/frame_animation.h"
-#include "animation/frame_animations/moving_pixel.h"
 
 Application::Application()
-    : framebuffer_{displayConfig_.framebufferWidth, displayConfig_.framebufferHeight}, renderer_{sdlRenderer_, displayConfig_}
+    : displayConfig_{}, animationController_{displayConfig_}
 {
 }
 
@@ -42,8 +37,10 @@ bool Application::initialise()
         return false;
     }
 
-    renderer_ = VexelRenderer(sdlRenderer_, displayConfig_);
-    if (!renderer_.isValid())
+    renderer_ = std::make_unique<VexelRenderer>(
+        sdlRenderer_,
+        displayConfig_);
+    if (!renderer_->isValid())
     {
         std::cerr << "Failed to create Vexel renderer: " << SDL_GetError() << std::endl;
         SDL_DestroyWindow(window_);
@@ -65,8 +62,6 @@ int Application::run()
         return -1;
     }
     running_ = true;
-
-    FrameAnimation animation = FrameAnimation(displayConfig_.framebufferWidth, displayConfig_.framebufferHeight, 2.0f, createMovingPixelFrames(displayConfig_.framebufferWidth, displayConfig_.framebufferHeight));
     Pixel clearColour = {0, 0, 0};
 
     while (running_)
@@ -74,23 +69,23 @@ int Application::run()
 
         frameTimer_.startFrame();
         handleEvents();
-        update(animation, frameTimer_.getDeltaTime());
-        render(animation, clearColour);
+        update(animationController_, frameTimer_.getDeltaTime());
+        render(animationController_, clearColour);
         frameTimer_.endFrame();
     }
 
     return 0;
 }
 
-void Application::update(Animation &animation, float deltaTime)
+void Application::update(AnimationController &controller, float deltaTime)
 {
-    animation.update(deltaTime);
+    controller.update(deltaTime);
 }
 
-void Application::render(Animation &animation, Pixel clearColour)
+void Application::render(AnimationController &controller, Pixel clearColour)
 {
-    renderer_.clear(clearColour);
-    renderer_.drawFramebuffer(animation.framebuffer());
+    renderer_->clear(clearColour);
+    renderer_->drawFramebuffer(controller.framebuffer());
 }
 
 void Application::handleEvents()
