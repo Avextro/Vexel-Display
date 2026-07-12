@@ -45,7 +45,7 @@ jobs:
           copy emulator\build\Release\emulator.exe release\
           copy C:\vcpkg\installed\x64-windows\bin\SDL2.dll release\
 
-          copy .github\release-assets\README.md release\
+          copy .github\release_assets\README.md release\
 
           Compress-Archive release VexelEmulator-${{ github.ref_name }}-windows-x64.zip
 
