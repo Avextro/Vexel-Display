@@ -35,10 +35,10 @@ jobs:
         shell: powershell
         run: |
           if (!(Test-Path ".github/releases/${{ github.ref_name }}.md")) {
-            "Release ${{ github.ref_name }}" | Out-File release-notes.md
+            "Release ${{ github.ref_name }}" | Out-File release-notes.md -Encoding utf8
           }
           else {
-            Copy-Item ".github/releases/${{ github.ref_name }}.md" release-notes.md
+            Copy-Item ".github/releases/${{ github.ref_name }}.md" release-notes.md -Encoding utf8
           }
 
       - name: Package Release
