@@ -35,10 +35,11 @@ jobs:
         shell: powershell
         run: |
           if (!(Test-Path ".github/releases/${{ github.ref_name }}.md")) {
-            "Release ${{ github.ref_name }}" | Out-File release-notes.md -Encoding utf8
+            "# Release ${{ github.ref_name }}" | Out-File release-notes.md -Encoding utf8
           }
           else {
-            Copy-Item ".github/releases/${{ github.ref_name }}.md" release-notes.md -Encoding utf8
+            Get-Content ".github/releases/${{ github.ref_name }}.md" |
+              Set-Content release-notes.md -Encoding utf8
           }
 
       - name: Package Release
@@ -59,5 +60,6 @@ jobs:
         with:
           body_path: release-notes.md
           generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
           files: |
             VexelEmulator-${{ github.ref_name }}-windows-x64.zip
