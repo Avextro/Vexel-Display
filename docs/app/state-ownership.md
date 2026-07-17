@@ -6,9 +6,9 @@ Owned by app/state
 
 Contains:
 
-- User session
-- Theme preferences
-- Application Settings
+- User session - perssistant
+- Theme preferences - perssistant
+- Application Settings - perssistant
 - Active LED panel
 
 ## Editor State
