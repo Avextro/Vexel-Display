@@ -12,12 +12,13 @@ Contains:
 - Active LED panel
 
 ## Editor State
+
 Owned by features/editor
 
-Contains: 
+Contains:
+
 - Current animation/image
 - Current tool
-
 
 ## Component State
 
