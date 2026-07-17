@@ -4,5 +4,8 @@
     "VCPKG_TARGET_TRIPLET": "x64-windows"
   },
   "cmake.generator": "Visual Studio 17 2022",
-  "cmake.sourceDirectory": "D:/Personal Projects/Vexel-Display/emulator"
+  "cmake.sourceDirectory": "D:/Personal Projects/Vexel-Display/emulator",
+
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
