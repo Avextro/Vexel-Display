@@ -11,7 +11,7 @@ export const createSettingsSlice: StateCreator<
   [],
   SettingsSlice
 > = (set) => ({
-  darkMode: true,
+  darkMode: false,
 
   setDarkMode: (enabled) =>
     set({
