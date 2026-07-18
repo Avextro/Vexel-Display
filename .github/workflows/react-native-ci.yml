@@ -6,6 +6,9 @@ on:
       - "app/**"
       - "protocol/**"
 
+permissions:
+  contents: read
+
 jobs:
   pr-checks:
     runs-on: ubuntu-latest
