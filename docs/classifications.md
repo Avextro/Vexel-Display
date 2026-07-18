@@ -8,6 +8,7 @@
 # Types:
 
 - feat - new feature
+- test - adding or updating a test
 - fix - bug fix
 - docs - documentation changes
 - refac - code refactoring
