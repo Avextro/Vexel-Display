@@ -47,7 +47,8 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
-    "test": "jest"
+    "test": "jest",
+    "prebuild:check": "expo prebuild --no-install"
   },
   "jest": {
     "preset": "jest-expo"
