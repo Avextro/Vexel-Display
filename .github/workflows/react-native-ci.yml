@@ -1,0 +1,52 @@
+name: React Native CI
+
+on:
+  pull_request:
+    paths:
+      - "app/**"
+      - "protocol/**"
+
+permissions:
+  contents: read
+
+jobs:
+  pr-checks:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: app
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run TypeScript check
+        run: npm run typecheck
+
+      - name: Run unit & component tests
+        run: npm test
+
+      - name: Verify expo prebuild
+        run: npx expo prebuild --no-install
+
+  #main-checks:
+  # if: github.base_ref == 'main'
+  #runs-on: ubuntu-latest
+  #steps:
+  #- run: npm ci
+  #- run: npm run integration:test
+  #- run: npm run e2e:test
