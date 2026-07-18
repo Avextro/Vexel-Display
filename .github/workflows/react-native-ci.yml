@@ -9,6 +9,11 @@ on:
 jobs:
   pr-checks:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: app
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
