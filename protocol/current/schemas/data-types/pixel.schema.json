@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "title": "Pixel",
+
+  "type": "object",
+
+  "properties": {
+    "red": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
+    },
+
+    "green": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
+    },
+
+    "blue": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
+    },
+
+    "alpha": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
+    }
+  },
+
+  "required": ["red", "green", "blue", "alpha"]
+}
