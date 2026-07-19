@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "title": "SetFramebufferPayload",
+
+  "type": "object",
+
+  "properties": {
+    "framebuffer": {
+      "$ref": "../../../data-types/framebuffer.schema.json"
+    }
+  },
+
+  "required": ["framebuffer"]
+}
