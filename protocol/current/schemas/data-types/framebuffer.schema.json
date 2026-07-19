@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "title": "Framebuffer",
+
+  "type": "object",
+
+  "properties": {
+    "width": {
+      "type": "integer",
+      "minimum": 0
+    },
+
+    "height": {
+      "type": "integer",
+      "minimum": 0
+    },
+
+    "pixels": {
+      "type": "array",
+      "items": {
+        "$ref": "pixel.schema.json"
+      }
+    }
+  },
+
+  "required": ["with", "height", "pixels"]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "title": "Envelope",
+
+  "type": "object",
+
+  "properties": {
+    "protocolVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "messageType": {
+      "type": "string",
+      "enum": [
+        "IncreasePlaybackSpeed",
+        "DecreasePlaybackSpeed",
+        "CycleAnimation",
+        "CycleColour",
+        "SetFramebuffer",
+        "GetPlaybackSpeed",
+        "GetColour",
+        "GetFramebuffer",
+        "CurrentPlaybackSpeed",
+        "CurrentColour",
+        "CurrentFramebuffer"
+      ]
+    },
+
+    "payload": {
+      "type": "object"
+    }
+  },
+
+  "required": ["protocolVersion", "id", "messageType", "payload"]
+}
