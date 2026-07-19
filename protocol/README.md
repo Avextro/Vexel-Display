@@ -13,10 +13,10 @@ JSON
 
 ## Documentation
 
-- [Protocol Overview](docs/current/protocol.md)
-- [Envelope Format](docs/current/envelope.md)
-- [Message Types](docs/current/messages.md)
-- [Data Types](docs/current/data-types.md)
-- [Compatibility and Error Handling](docs/current/compatibility-and-error-handling.md)
-- [Versioning Rules](docs/current/versioning.md)
+- [Protocol Overview](current/docs/protocol.md)
+- [Envelope Format](current/docs/envelope.md)
+- [Message Types](current/docs/messages.md)
+- [Data Types](current/docs/data-types.md)
+- [Compatibility and Error Handling](current/docs/compatibility-and-error-handling.md)
+- [Versioning Rules](current/docs/versioning.md)
 - [Change Log](CHANGELOG.md)
